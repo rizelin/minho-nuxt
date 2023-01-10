@@ -6,11 +6,16 @@
 </template>
 
 <script>
+import axios from 'axios'
 import Logo from '@/components/Logo.vue'
 
 export default {
   comments: {
     Logo,
+  },
+  async created() {
+    const response = await axios.get('http://localhost:3000/products')
+    console.log(response)
   }
 }
 </script>
