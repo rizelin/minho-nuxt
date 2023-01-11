@@ -2,7 +2,12 @@
   <div class="app">
     <main>
       <div>
-        <search-input></search-input>
+        <!-- 컴포넌트는 v-model로도 사용 가능함 -->
+        <!-- v-model="searchKeyword" -->
+        <search-input
+        :search-keyword="searchKeyword"
+        @input="updateSearchKeyword"
+          ></search-input>
       </div>
       <ul>
         <li
@@ -42,12 +47,20 @@ export default {
       products
     }
   },
+  data() {
+    return {
+      searchKeyword: '',
+    }
+  },
   methods: {
     moveToDetailPage(id) {
       console.log(id)
       this.$router.push(`detail/${id}`)
+    },
+    updateSearchKeyword(keyword) {
+     this.searchKeyword = keyword
     }
-  }
+  },
   // data(){
   //   return {
   //     products: [],
