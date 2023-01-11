@@ -3,11 +3,12 @@
     <main>
       <div>
         <!-- 컴포넌트는 v-model로도 사용 가능함 -->
-        <!-- v-model="searchKeyword" -->
+        <!-- @input="updateSearchKeyword" -->
         <search-input
-        :search-keyword="searchKeyword"
-        @input="updateSearchKeyword"
-          ></search-input>
+          v-model="searchKeyword"
+          :search-keyword="searchKeyword"
+          @search="searchProducts"
+        ></search-input>
       </div>
       <ul>
         <li
@@ -32,6 +33,8 @@
 <script>
 import axios from 'axios';
 import SearchInput from '@/components/SearchInput.vue';
+import { fetchProductsByKeyword } from '@/api/index'
+
 
 export default {
   components: { SearchInput },
@@ -57,9 +60,13 @@ export default {
       console.log(id)
       this.$router.push(`detail/${id}`)
     },
-    updateSearchKeyword(keyword) {
-     this.searchKeyword = keyword
-    }
+    async searchProducts() {
+      const response = await fetchProductsByKeyword(this.searchKeyword);
+      console.log(response)
+    },
+    // updateSearchKeyword(keyword) {
+    //  this.searchKeyword = keyword
+    // }
   },
   // data(){
   //   return {
