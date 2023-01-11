@@ -1,7 +1,6 @@
 <template>
   <div>
-    <p>메인 페이지입니다</p>
-    <div>
+    <main>
       <ul>
         <li v-for="product in products" :key="product.id">
           <img :src="product.imageUrl" :alt="product.name" />
@@ -9,7 +8,7 @@
           <p>{{ product.price }}</p>
         </li>
       </ul>
-    </div>
+    </main>
   </div>
 </template>
 
